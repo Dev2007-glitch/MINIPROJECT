@@ -1,2 +1,2 @@
-# MINIPROJECT
-# Testing this file for pull and push repository
+MINIPROJECT
+Testing this file for pull and push repository
