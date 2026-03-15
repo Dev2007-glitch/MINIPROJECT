@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerLink - Spare Parts Marketplace</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffcc00;
+            --secondary: #1a202c;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #e6b800 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .search-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 4rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: var(--secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #e6b800;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            background: white;
+            color: var(--gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .filter-tab:hover {
+            border-color: var(--primary);
+        }
+
+        .sort-dropdown {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            color: var(--gray);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .part-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .part-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .part-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+
+        .part-info {
+            padding: 1.5rem;
+        }
+
+        .part-category {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .part-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .part-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .part-compatibility {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .part-compatibility li {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .part-compatibility li i {
+            color: var(--success);
+            font-size: 0.7rem;
+        }
+
+        .part-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .part-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title i {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .search-header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-tabs {
+                justify-content: center;
+            }
+
+            .parts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #e6b800 100%);
+            padding: 1.5rem 2rem;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .close {
+            color: var(--secondary);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .part-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .part-image-container {
+            text-align: center;
+        }
+
+        .part-main-image {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .part-info-details {
+            padding: 1rem 0;
+        }
+
+        .part-price-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .part-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-text {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .part-compatibility-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .part-compatibility-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--dark);
+        }
+
+        .part-compatibility-list li i {
+            color: var(--success);
+            font-size: 1rem;
+        }
+
+        .purchase-form {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .purchase-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-purchase {
+            flex: 1;
+            background: var(--primary);
+            color: var(--secondary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-purchase:hover {
+            background: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        .btn-cancel {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #4b5563;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 98%;
+                margin: 1% auto;
+                max-height: 95vh;
+            }
+
+            .part-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .purchase-actions {
+                flex-direction: column;
+            }
+
+            .modal-header {
+                padding: 1rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">PowerLink</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="U.account/account.html"><i class="fas fa-user"></i> Account</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-header">
+                <h1><i class="fas fa-tools"></i> Spare Parts Marketplace</h1>
+                <p>Find genuine spare parts for electronics and vehicles</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search for parts (e.g., battery, screen, brake pads...)" id="searchInput">
+                <button class="search-btn" onclick="searchParts()">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterParts('all')">All Parts</button>
+                <button class="filter-tab" onclick="filterParts('electronics')">Electronics</button>
+                <button class="filter-tab" onclick="filterParts('vehicles')">Vehicles</button>
+                <button class="filter-tab" onclick="filterParts('popular')">Popular</button>
+            </div>
+            <select class="sort-dropdown" onchange="sortParts(this.value)">
+                <option value="name">Sort by Name</option>
+                <option value="price">Sort by Price</option>
+                <option value="rating">Sort by Rating</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Electronics Parts Section -->
+        <section class="category-section" id="electronics-section">
+            <h2 class="category-title">
+                <i class="fas fa-microchip"></i> Electronics Spare Parts
+            </h2>
+            <div class="parts-grid" id="electronics-grid">
+                <!-- Electronics parts will be populated here -->
+            </div>
+        </section>
+
+        <!-- Vehicle Parts Section -->
+        <section class="category-section" id="vehicles-section">
+            <h2 class="category-title">
+                <i class="fas fa-car"></i> Vehicle Spare Parts
+            </h2>
+            <div class="parts-grid" id="vehicles-grid">
+                <!-- Vehicle parts will be populated here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Part Detail Modal -->
+    <div id="partModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Part Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Modal content will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const brandParam = urlParams.get('brand');
+        
+        // Sample parts data
+        const parts = {
+            electronics: [
+                // Smartphone Parts
+                {
+                    id: 1,
+                    name: "iPhone 15 Pro Display Assembly",
+                    description: "Original OLED display assembly for iPhone 15 Pro with True Tone functionality.",
+                    price: 299.99,
+                    category: "electronics",
+                    subcategory: "smartphone",
+                    brand: "Apple",
+                    compatibility: ["iPhone 15 Pro"],
+                    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702708"
+                },
+                {
+                    id: 2,
+                    name: "Samsung Galaxy S23 Battery",
+                    description: "Original replacement battery for Samsung Galaxy S23 with 4000mAh capacity.",
+                    price: 49.99,
+                    category: "electronics",
+                    subcategory: "smartphone",
+                    brand: "Samsung",
+                    compatibility: ["Samsung Galaxy S23", "Samsung Galaxy S23+"],
+                    image: "https://image-us.samsung.com/us/smartphones/galaxy-s23/images/gallery/cream/01-DM3-Cream-PDP-1600x1200.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Google Pixel 7 Camera Module",
+                    description: "Original rear camera module for Google Pixel 7 with wide and ultrawide lenses.",
+                    price: 129.99,
+                    category: "electronics",
+                    subcategory: "smartphone",
+                    brand: "Google",
+                    compatibility: ["Google Pixel 7", "Google Pixel 7 Pro"],
+                    image: "https://lh3.googleusercontent.com/9JwZlxXAkXUAHl8Oy6uRUY7Gx9n5OQfw3H1zLztDcIQvLXpzVIEF5QJkUZzHipZVqw=w1080"
+                },
+                
+                // Laptop Parts
+                {
+                    id: 4,
+                    name: "MacBook Pro M2 Keyboard",
+                    description: "Replacement keyboard for MacBook Pro M2 models with backlight functionality.",
+                    price: 149.99,
+                    category: "electronics",
+                    subcategory: "laptop",
+                    brand: "Apple",
+                    compatibility: ["MacBook Pro 14-inch (2023)", "MacBook Pro 16-inch (2023)"],
+                    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-spacegray-select-202301?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1671304673229"
+                },
+                {
+                    id: 5,
+                    name: "Dell XPS 15 SSD",
+                    description: "1TB NVMe SSD replacement for Dell XPS 15 laptops with installation kit.",
+                    price: 199.99,
+                    category: "electronics",
+                    subcategory: "laptop",
+                    brand: "Dell",
+                    compatibility: ["Dell XPS 15 9500", "Dell XPS 15 9510", "Dell XPS 15 9520"],
+                    image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&wid=3337&hei=2417&qlt=100,0&resMode=sharp2&size=3337,2417"
+                },
+                {
+                    id: 6,
+                    name: "Lenovo ThinkPad RAM",
+                    description: "32GB DDR4 RAM upgrade kit for Lenovo ThinkPad laptops.",
+                    price: 129.99,
+                    category: "electronics",
+                    subcategory: "laptop",
+                    brand: "Lenovo",
+                    compatibility: ["ThinkPad X1 Carbon Gen 9", "ThinkPad X1 Carbon Gen 10", "ThinkPad T14"],
+                    image: "https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjM5NTIxfGltYWdlL3BuZ3xoMDgvaGQ5LzE0MzMyMDU0NTQwMzE4LnBuZ3w0YzRlMjJkMzU1NDQzZGFhZWM0Y2FkZGQ5ZTJhNjM3YzQyNmY2NTRiMzFjMTkwYTRkYjBkMWJhN2Y5OGNhMTU2/lenovo-laptop-thinkpad-x1-carbon-gen-10-14-hero.png"
+                },
+                
+                // TV Parts
+                {
+                    id: 7,
+                    name: "Samsung QLED Power Board",
+                    description: "Replacement power supply board for Samsung QLED TV models.",
+                    price: 89.99,
+                    category: "electronics",
+                    subcategory: "tv",
+                    brand: "Samsung",
+                    compatibility: ["Samsung Q70 Series", "Samsung Q80 Series", "Samsung Q90 Series"],
+                    image: "https://images.samsung.com/is/image/samsung/p6pim/in/qa75qn900bkxxl/gallery/in-neo-qled-8k-qa75qn900bkxxl-531503744?$650_519_PNG$"
+                },
+                {
+                    id: 8,
+                    name: "LG OLED Display Panel",
+                    description: "Replacement OLED panel for LG C-series TVs with installation guide.",
+                    price: 599.99,
+                    category: "electronics",
+                    subcategory: "tv",
+                    brand: "LG",
+                    compatibility: ["LG C1 OLED", "LG C2 OLED", "LG C3 OLED"],
+                    image: "https://www.lg.com/us/images/tvs/md08000728/gallery/D-01.jpg"
+                },
+                {
+                    id: 9,
+                    name: "Sony TV Main Board",
+                    description: "Main logic board for Sony Bravia TV models with HDMI 2.1 support.",
+                    price: 199.99,
+                    category: "electronics",
+                    subcategory: "tv",
+                    brand: "Sony",
+                    compatibility: ["Sony X90J", "Sony X95J", "Sony A80J"],
+                    image: "https://www.sony.com/image/5d02da5df552836db894cead8a68f5f3?fmt=png-alpha&wid=660&hei=660"
+                },
+                
+                // Gaming Console Parts
+                {
+                    id: 10,
+                    name: "PlayStation 5 Fan Assembly",
+                    description: "Replacement cooling fan for PlayStation 5 console with reduced noise.",
+                    price: 59.99,
+                    category: "electronics",
+                    subcategory: "gaming",
+                    brand: "Sony",
+                    compatibility: ["PlayStation 5 Digital Edition", "PlayStation 5 Disc Edition"],
+                    image: "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$facebook$"
+                },
+                {
+                    id: 11,
+                    name: "Xbox Series X Power Supply",
+                    description: "Replacement power supply unit for Xbox Series X console.",
+                    price: 79.99,
+                    category: "electronics",
+                    subcategory: "gaming",
+                    brand: "Microsoft",
+                    compatibility: ["Xbox Series X"],
+                    image: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4mRni?ver=a707"
+                },
+                {
+                    id: 12,
+                    name: "Nintendo Switch Joy-Con Joystick",
+                    description: "Replacement analog joystick for Nintendo Switch Joy-Con controllers to fix drift issues.",
+                    price: 19.99,
+                    category: "electronics",
+                    subcategory: "gaming",
+                    brand: "Nintendo",
+                    compatibility: ["Nintendo Switch Joy-Con (Left)", "Nintendo Switch Joy-Con (Right)"],
+                    image: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_2.0/c_scale,w_400/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image01"
+                },
+                
+                // Computer Parts
+                {
+                    id: 13,
+                    name: "NVIDIA RTX 4070 Cooling Fan",
+                    description: "Replacement cooling fan for NVIDIA RTX 4070 graphics cards.",
+                    price: 49.99,
+                    category: "electronics",
+                    subcategory: "computer",
+                    brand: "NVIDIA",
+                    compatibility: ["NVIDIA GeForce RTX 4070", "NVIDIA GeForce RTX 4070 Ti"],
+                    image: "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ada/rtx-4090/geforce-ada-4090-product-gallery-full-screen-3840-1.jpg"
+                },
+                {
+                    id: 14,
+                    name: "AMD Ryzen CPU Cooler",
+                    description: "High-performance CPU cooler compatible with AMD Ryzen processors.",
+                    price: 69.99,
+                    category: "electronics",
+                    subcategory: "computer",
+                    brand: "AMD",
+                    compatibility: ["AMD Ryzen 5000 Series", "AMD Ryzen 7000 Series"],
+                    image: "https://www.amd.com/system/files/2022-09/1728141-amd-ryzen-9-7000-series-PIB-angle-1260x709.png"
+                },
+                {
+                    id: 15,
+                    name: "Intel Motherboard Chipset",
+                    description: "Replacement chipset for Intel Z690 motherboards with installation tools.",
+                    price: 129.99,
+                    category: "electronics",
+                    subcategory: "computer",
+                    brand: "Intel",
+                    compatibility: ["Intel Z690 Motherboards", "Intel 12th Gen Processors", "Intel 13th Gen Processors"],
+                    image: "https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-11/13th-gen-core-i9-k-badge-1x1.png.rendition.intel.web.480.360.png"
+                }
+            ],
+            vehicles: [
+                // Car Engine Parts
+                {
+                    id: 16,
+                    name: "Toyota Camry Fuel Injector Set",
+                    description: "Set of 4 OEM fuel injectors for Toyota Camry engines with installation gaskets.",
+                    price: 199.99,
+                    category: "vehicles",
+                    subcategory: "engine",
+                    brand: "Toyota",
+                    compatibility: ["Toyota Camry 2018-2023", "Toyota RAV4 2019-2023"],
+                    image: "https://toyotaassets.scene7.com/is/image/toyota/CAM_MY23_0004_V001?fmt=jpg&fit=crop&qlt=90&wid=1500"
+                },
+                {
+                    id: 17,
+                    name: "Honda Civic Timing Belt Kit",
+                    description: "Complete timing belt kit for Honda Civic engines including tensioners and water pump.",
+                    price: 149.99,
+                    category: "vehicles",
+                    subcategory: "engine",
+                    brand: "Honda",
+                    compatibility: ["Honda Civic 2016-2022", "Honda Accord 2018-2022"],
+                    image: "https://automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2023/Civic-Sedan/Feature-Blades/Interior/MY23-civic-sedan-fb-interior-spacious-cabin-2x.jpg"
+                },
+                {
+                    id: 18,
+                    name: "Tata Nexon Turbocharger",
+                    description: "Genuine turbocharger for Tata Nexon diesel engines with mounting gaskets.",
+                    price: 399.99,
+                    category: "vehicles",
+                    subcategory: "engine",
+                    brand: "Tata Motors",
+                    compatibility: ["Tata Nexon Diesel 2017-2023", "Tata Altroz Diesel 2020-2023"],
+                    image: "https://nexonev.tatamotors.com/wp-content/themes/tata-nexon/images/nexon-ev-max/max-banner-desk.jpg"
+                },
+                
+                // Car Brake Parts
+                {
+                    id: 19,
+                    name: "Mahindra Thar Brake Pad Set",
+                    description: "Heavy-duty front brake pad set for Mahindra Thar with improved stopping power.",
+                    price: 89.99,
+                    category: "vehicles",
+                    subcategory: "brakes",
+                    brand: "Mahindra & Mahindra",
+                    compatibility: ["Mahindra Thar 2020-2023", "Mahindra Scorpio 2022-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/40087/thar-exterior-right-front-three-quarter-11.jpeg?q=80"
+                },
+                {
+                    id: 20,
+                    name: "Maruti Suzuki Swift Brake Discs",
+                    description: "Pair of front ventilated brake discs for Maruti Suzuki Swift with high heat dissipation.",
+                    price: 119.99,
+                    category: "vehicles",
+                    subcategory: "brakes",
+                    brand: "Maruti Suzuki",
+                    compatibility: ["Maruti Suzuki Swift 2018-2023", "Maruti Suzuki Baleno 2019-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/126463/swift-exterior-right-front-three-quarter.jpeg?isig=0&q=80"
+                },
+                {
+                    id: 21,
+                    name: "Hyundai Creta Brake Caliper",
+                    description: "Front brake caliper assembly for Hyundai Creta with mounting hardware.",
+                    price: 149.99,
+                    category: "vehicles",
+                    subcategory: "brakes",
+                    brand: "Hyundai",
+                    compatibility: ["Hyundai Creta 2020-2023", "Hyundai Venue 2020-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/141115/creta-exterior-right-front-three-quarter.jpeg?isig=0&q=80"
+                },
+                
+                // Car Suspension Parts
+                {
+                    id: 22,
+                    name: "Kia Seltos Shock Absorbers",
+                    description: "Pair of front shock absorbers for Kia Seltos with improved ride quality.",
+                    price: 179.99,
+                    category: "vehicles",
+                    subcategory: "suspension",
+                    brand: "Kia",
+                    compatibility: ["Kia Seltos 2019-2023", "Kia Sonet 2020-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/144163/seltos-exterior-right-front-three-quarter.jpeg?isig=0&q=80"
+                },
+                {
+                    id: 23,
+                    name: "Toyota Fortuner Coil Springs",
+                    description: "Set of 4 heavy-duty coil springs for Toyota Fortuner with increased load capacity.",
+                    price: 249.99,
+                    category: "vehicles",
+                    subcategory: "suspension",
+                    brand: "Toyota",
+                    compatibility: ["Toyota Fortuner 2016-2023", "Toyota Hilux 2018-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/44709/fortuner-exterior-right-front-three-quarter-19.jpeg?q=80"
+                },
+                {
+                    id: 24,
+                    name: "Mahindra XUV700 Control Arms",
+                    description: "Front lower control arms for Mahindra XUV700 with ball joints and bushings.",
+                    price: 199.99,
+                    category: "vehicles",
+                    subcategory: "suspension",
+                    brand: "Mahindra & Mahindra",
+                    compatibility: ["Mahindra XUV700 2021-2023", "Mahindra XUV500 2018-2021"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/42355/xuv700-exterior-right-front-three-quarter.jpeg?isig=0&q=80"
+                },
+                
+                // Motorcycle Parts
+                {
+                    id: 25,
+                    name: "Hero Splendor Clutch Assembly",
+                    description: "Complete clutch assembly for Hero Splendor with friction plates and springs.",
+                    price: 59.99,
+                    category: "vehicles",
+                    subcategory: "motorcycle",
+                    brand: "Hero MotoCorp",
+                    compatibility: ["Hero Splendor Plus 2018-2023", "Hero HF Deluxe 2019-2023"],
+                    image: "https://bd.gaadicdn.com/processedimages/hero-motocorp/splendor-plus/source/splendor-plus641eafd3e8d3d.jpg?tr=w-375"
+                },
+                {
+                    id: 26,
+                    name: "Bajaj Pulsar Chain Sprocket Kit",
+                    description: "Chain and sprocket kit for Bajaj Pulsar with increased durability.",
+                    price: 69.99,
+                    category: "vehicles",
+                    subcategory: "motorcycle",
+                    brand: "Bajaj Auto",
+                    compatibility: ["Bajaj Pulsar NS200 2020-2023", "Bajaj Pulsar 220F 2019-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/1/versions/bajaj-pulsar-ns200-2023-standard1678712789943.jpg?q=80"
+                },
+                {
+                    id: 27,
+                    name: "TVS Apache Cylinder Kit",
+                    description: "Engine cylinder kit for TVS Apache with piston, rings, and gaskets.",
+                    price: 129.99,
+                    category: "vehicles",
+                    subcategory: "motorcycle",
+                    brand: "TVS Motor Company",
+                    compatibility: ["TVS Apache RTR 160 2019-2023", "TVS Apache RTR 180 2018-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/43085/apache-rtr-160-right-front-three-quarter.jpeg?q=80"
+                },
+                
+                // Car Electrical Parts
+                {
+                    id: 28,
+                    name: "Maruti Swift Alternator",
+                    description: "Genuine alternator for Maruti Swift with built-in voltage regulator.",
+                    price: 189.99,
+                    category: "vehicles",
+                    subcategory: "electrical",
+                    brand: "Maruti Suzuki",
+                    compatibility: ["Maruti Suzuki Swift 2018-2023", "Maruti Suzuki Dzire 2017-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/126463/swift-exterior-right-front-three-quarter.jpeg?isig=0&q=80"
+                },
+                {
+                    id: 29,
+                    name: "Hyundai i20 ECU",
+                    description: "Engine control unit for Hyundai i20 with pre-programmed software.",
+                    price: 349.99,
+                    category: "vehicles",
+                    subcategory: "electrical",
+                    brand: "Hyundai",
+                    compatibility: ["Hyundai i20 2020-2023", "Hyundai Venue 2019-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/40530/i20-exterior-right-front-three-quarter-5.jpeg?q=80"
+                },
+                {
+                    id: 30,
+                    name: "Royal Enfield Classic Ignition Coil",
+                    description: "High-performance ignition coil for Royal Enfield Classic motorcycles.",
+                    price: 49.99,
+                    category: "vehicles",
+                    subcategory: "electrical",
+                    brand: "Eicher Motors",
+                    compatibility: ["Royal Enfield Classic 350 2018-2023", "Royal Enfield Meteor 350 2020-2023"],
+                    image: "https://imgd.aeplcdn.com/1280x720/n/cw/ec/40432/royal-enfield-classic-350-right-front-three-quarter8.jpeg?q=80"
+                }
+            ]
+        };
+
+        let currentFilter = 'all';
+        let currentSort = 'name';
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if a brand parameter exists in the URL
+            if (brandParam) {
+                // Update page title and description
+                document.querySelector('.search-header h1').textContent = brandParam + " Spare Parts";
+                document.querySelector('.search-header p').textContent = "Browse all spare parts for " + brandParam + " products";
+                
+                // Filter and display only parts from the selected brand
+                showBrandParts(brandParam);
+            } else {
+                // Show all parts if no brand is specified
+                renderParts();
+            }
+            setupSearch();
+        });
+
+        // Show parts for a specific brand
+        function showBrandParts(brandName) {
+            const electronicsGrid = document.getElementById('electronics-grid');
+            const vehiclesGrid = document.getElementById('vehicles-grid');
+            
+            electronicsGrid.innerHTML = '';
+            vehiclesGrid.innerHTML = '';
+            
+            // Filter parts by brand
+            const brandElectronics = parts.electronics.filter(part => part.brand === brandName);
+            const brandVehicles = parts.vehicles.filter(part => part.brand === brandName);
+            
+            // Hide sections if no parts
+            document.getElementById('electronics-section').style.display = brandElectronics.length > 0 ? 'block' : 'none';
+            document.getElementById('vehicles-section').style.display = brandVehicles.length > 0 ? 'block' : 'none';
+            
+            // Update section titles
+            if (brandElectronics.length > 0) {
+                document.querySelector('#electronics-section .category-title').innerHTML = 
+                    `<i class="fas fa-microchip"></i> ${brandName} Electronics Spare Parts`;
+            }
+            
+            if (brandVehicles.length > 0) {
+                document.querySelector('#vehicles-section .category-title').innerHTML = 
+                    `<i class="fas fa-car"></i> ${brandName} Vehicle Spare Parts`;
+            }
+            
+            // Render filtered parts
+            brandElectronics.forEach(part => {
+                electronicsGrid.appendChild(createPartCard(part));
+            });
+            
+            brandVehicles.forEach(part => {
+                vehiclesGrid.appendChild(createPartCard(part));
+            });
+            
+            // Show no parts message if needed
+            if (brandElectronics.length === 0 && brandVehicles.length === 0) {
+                electronicsGrid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--gray);">
+                        <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h3>No spare parts found for ${brandName}</h3>
+                        <p>Try searching for a different brand</p>
+                    </div>
+                `;
+                document.getElementById('electronics-section').style.display = 'block';
+            }
+        }
+
+        // Render parts based on current filter
+        function renderParts() {
+            const electronicsGrid = document.getElementById('electronics-grid');
+            const vehiclesGrid = document.getElementById('vehicles-grid');
+            
+            electronicsGrid.innerHTML = '';
+            vehiclesGrid.innerHTML = '';
+
+            let electronicsToShow = parts.electronics;
+            let vehiclesToShow = parts.vehicles;
+
+            // Apply filter
+            if (currentFilter === 'popular') {
+                electronicsToShow = parts.electronics.slice(0, 4);
+                vehiclesToShow = parts.vehicles.slice(0, 4);
+            }
+
+            // Apply sorting
+            electronicsToShow = sortPartsArray(electronicsToShow);
+            vehiclesToShow = sortPartsArray(vehiclesToShow);
+
+            // Render electronics
+            electronicsToShow.forEach(part => {
+                electronicsGrid.appendChild(createPartCard(part));
+            });
+
+            // Render vehicles
+            vehiclesToShow.forEach(part => {
+                vehiclesGrid.appendChild(createPartCard(part));
+            });
+        }
+
+        // Create part card element
+        function createPartCard(part) {
+            const card = document.createElement('div');
+            card.className = 'part-card';
+            card.onclick = () => openPartModal(part);
+            
+            // Generate compatibility list items
+            const compatibilityItems = part.compatibility.map(item => 
+                `<li><i class="fas fa-check"></i> ${item}</li>`
+            ).join('');
+            
+            card.innerHTML = `
+                <img src="${part.image}" alt="${part.name}" class="part-image" onerror="this.src='https://via.placeholder.com/280x200/f1f5f9/64748b?text=${encodeURIComponent(part.name)}'">
+                <div class="part-info">
+                    <span class="part-category">${part.subcategory.toUpperCase()}</span>
+                    <h3 class="part-name">${part.name}</h3>
+                    <p class="part-description">${part.description}</p>
+                    <ul class="part-compatibility">
+                        ${compatibilityItems}
+                    </ul>
+                    <div class="part-footer">
+                        <span class="part-price">₹${(part.price * 75).toFixed(2)}</span>
+                        <button class="cart-btn" onclick="event.stopPropagation(); addToCart(${part.id})">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Filter parts
+        function filterParts(filter) {
+            currentFilter = filter;
+            
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide sections based on filter
+            if (filter === 'electronics') {
+                document.getElementById('electronics-section').style.display = 'block';
+                document.getElementById('vehicles-section').style.display = 'none';
+            } else if (filter === 'vehicles') {
+                document.getElementById('electronics-section').style.display = 'none';
+                document.getElementById('vehicles-section').style.display = 'block';
+            } else {
+                document.getElementById('electronics-section').style.display = 'block';
+                document.getElementById('vehicles-section').style.display = 'block';
+            }
+            
+            renderParts();
+        }
+
+        // Sort parts
+        function sortParts(sortBy) {
+            currentSort = sortBy;
+            renderParts();
+        }
+
+        // Sort parts array
+        function sortPartsArray(partsArray) {
+            return partsArray.sort((a, b) => {
+                switch(currentSort) {
+                    case 'price':
+                        return a.price - b.price;
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'rating':
+                        return Math.random() - 0.5; // Mock rating sort
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchParts();
+                }
+            });
+        }
+
+        function searchParts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (!searchTerm) {
+                renderParts();
+                return;
+            }
+
+            const allParts = [...parts.electronics, ...parts.vehicles];
+            const filteredParts = allParts.filter(part => 
+                part.name.toLowerCase().includes(searchTerm) ||
+                part.description.toLowerCase().includes(searchTerm) ||
+                part.subcategory.toLowerCase().includes(searchTerm) ||
+                part.brand.toLowerCase().includes(searchTerm) ||
+                part.compatibility.some(item => item.toLowerCase().includes(searchTerm))
+            );
+
+            // Clear existing grids
+            document.getElementById('electronics-grid').innerHTML = '';
+            document.getElementById('vehicles-grid').innerHTML = '';
+
+            if (filteredParts.length === 0) {
+                document.getElementById('electronics-grid').innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--gray);">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h3>No spare parts found</h3>
+                        <p>Try searching with different keywords</p>
+                    </div>
+                `;
+                document.getElementById('vehicles-section').style.display = 'none';
+                return;
+            }
+
+            // Group filtered parts by category
+            const electronics = filteredParts.filter(p => p.category === 'electronics');
+            const vehicles = filteredParts.filter(p => p.category === 'vehicles');
+
+            // Show/hide sections based on results
+            document.getElementById('electronics-section').style.display = electronics.length > 0 ? 'block' : 'none';
+            document.getElementById('vehicles-section').style.display = vehicles.length > 0 ? 'block' : 'none';
+
+            // Render filtered results
+            electronics.forEach(part => {
+                document.getElementById('electronics-grid').appendChild(createPartCard(part));
+            });
+
+            vehicles.forEach(part => {
+                document.getElementById('vehicles-grid').appendChild(createPartCard(part));
+            });
+        }
+
+        // Open part detail modal
+        function openPartModal(part) {
+            const modal = document.getElementById('partModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Find part by ID if number is passed
+            const partData = typeof part === 'number' 
+                ? [...parts.electronics, ...parts.vehicles].find(p => p.id === part)
+                : part;
+            
+            modalTitle.textContent = partData.name;
+            
+            // Generate compatibility list items for modal
+            const compatibilityItems = partData.compatibility.map(item => 
+                `<li><i class="fas fa-check"></i> ${item}</li>`
+            ).join('');
+            
+            modalContent.innerHTML = `
+                <div class="part-details">
+                    <div class="part-image-container">
+                        <img src="${partData.image}" alt="${partData.name}" class="part-main-image" onerror="this.src='https://via.placeholder.com/400x300/f1f5f9/64748b?text=${encodeURIComponent(partData.name)}'">
+                    </div>
+                    <div class="part-info-details">
+                        <div class="part-price-large">₹${(partData.price * 75).toFixed(2)}</div>
+                        <div class="part-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">(4.5) Based on 87 reviews</span>
+                        </div>
+                        <p style="color: var(--gray); margin-bottom: 1.5rem; line-height: 1.6;">${partData.description}</p>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>Brand:</strong> ${partData.brand}<br>
+                            <strong>Category:</strong> ${partData.category} / ${partData.subcategory}
+                        </div>
+                        <h4 style="margin-bottom: 0.5rem;">Compatible With:</h4>
+                        <ul class="part-compatibility-list">
+                            ${compatibilityItems}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="purchase-form">
+                    <h3 style="color: var(--secondary); margin-bottom: 1.5rem; font-size: 1.3rem;">
+                        <i class="fas fa-shopping-cart"></i> Purchase This Part
+                    </h3>
+                    <form id="purchaseForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" min="1" value="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Delivery Option</label>
+                                <select required>
+                                    <option value="">Select delivery option</option>
+                                    <option value="standard">Standard Delivery (3-5 days) - $5.99</option>
+                                    <option value="express">Express Delivery (1-2 days) - $12.99</option>
+                                    <option value="pickup">Store Pickup (Free)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Special Instructions (Optional)</label>
+                            <textarea placeholder="Any specific requirements or notes..."></textarea>
+                        </div>
+                        <div class="purchase-actions">
+                            <button type="submit" class="btn-purchase">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart - $${partData.price.toFixed(2)}
+                            </button>
+                            <button type="button" class="btn-cancel" onclick="closeModal()">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            
+            // Handle form submission
+            document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addToCart(partData.id, true);
+            });
+        }
+
+        // Add to cart function
+        function addToCart(partId, fromModal = false) {
+            // Find the part
+            const part = [...parts.electronics, ...parts.vehicles].find(p => p.id === partId);
+            
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--success);
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                text-align: center;
+                z-index: 3000;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            `;
+            successMessage.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <h3 style="margin-bottom: 0.5rem;">${part.name} Added to Cart!</h3>
+                <p>You can continue shopping or proceed to checkout.</p>
+            `;
+            
+            document.body.appendChild(successMessage);
+            
+            setTimeout(() => {
+                document.body.removeChild(successMessage);
+                if (fromModal) {
+                    closeModal();
+                }
+            }, 2000);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('partModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('partModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

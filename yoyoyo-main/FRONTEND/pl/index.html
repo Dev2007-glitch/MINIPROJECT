@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PowerLink - Your Shortcut to Power</title>
+ 
+    <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@30;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+ <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>PowerLink</span>
+      </div>
+      <nav class="nav-menu">
+    <ul class="nav-links">
+          <li><a href="#home" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a></li>
+          <li><a href="brand-ec.html" class="nav-link">
+            <i class="fas fa-handshake"></i>
+            <span>Partners</span>
+          </a></li>
+          <li><a href="login.html" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+          </a></li>
+          <li><a href="signup.html" class="nav-link">
+            <i class="fas fa-user-plus"></i>
+            <span>Sign Up</span>
+          </a></li>
+          <li><a href="../W&P/index.html" class="nav-link">
+            <i class="fas fa-tools"></i>
+            <span>Technician</span>
+          </a></li>
+            <li><a href="cart.html" class="nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+          </a></li>
+          
+</ul>
+  </nav>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+</header> 
+
+
+    <!-- Button in Navbar 
+<button class="cta-btn" onclick="window.location.href='auth.html'">
+  Login / Sign In
+</button> -->
+
+
+<!-- OR as a link -->
+  
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-background">
+      <div class="hero-pattern"></div>
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+      </div>
+    </div>
+    
+  <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <i class="fas fa-star"></i>
+          <span>Trusted by 10,000+ Customers</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Your Shortcut to 
+          <span class="gradient-text">Power</span>
+          <i class="fas fa-bolt"></i>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Fast, reliable, and verified electricians & mechanics—anytime, anywhere. 
+          Get professional service at your doorstep in 30 minutes or less.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Verified Experts</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Happy Customers</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number">30min</span>
+              <span class="stat-label">Average Response</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-search">
+        <div class="search-container">
+          <div class="search-header">
+            <h3>Find Your Service</h3>
+            <p>Get instant quotes from verified professionals</p>
+          </div>
+          
+          <div class="search-form">
+            <div class="search-input-group">
+              <div class="input-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <input type="text" id="locationInput" placeholder="Enter your location" class="search-input">
+              <button id="liveLocationBtn" class="live-location-btn" title="Use current location">
+                <i class="fas fa-crosshairs"></i>
+              </button>
+              <div class="input-border"></div>
+              <div id="locationSuggestions" class="suggestions-container"></div>
+            </div>
+            <!-- Dynamic Google Map -->
+<div class="map-container" style="margin-top: 20px; display:none;">
+  <iframe 
+    id="googleMap"
+    width="100%"
+    height="400"
+    style="border:0; border-radius: 12px;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+            <div class="search-input-group">
+              <div class="input-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <input type="text" id="serviceInput" placeholder="What service do you need?" class="search-input">
+              <div class="input-border"></div>
+              <div id="serviceSuggestions" class="suggestions-container"></div>
+            </div>
+            
+            <button id="findServiceBtn" class="search-btn">
+              <span class="btn-text">Find Service</span>
+              <i class="fas fa-arrow-right"></i>
+              <div class="btn-shine"></div>
+            </button>
+            
+            <div id="bookingSuccess" class="booking-success">
+              <div class="success-animation">
+                <div class="checkmark-circle">
+                  <div class="checkmark draw"></div>
+                </div>
+              </div>
+              <div class="success-message">
+                <h3></h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="quick-services">
+            <span class="quick-label">Popular Services:</span>
+            <div class="quick-tags">
+              <span class="tag">
+                <i class="fas fa-snowflake"></i>
+                AC Repair
+              </span>
+              <span class="tag">
+                <i class="fas fa-bolt"></i>
+                Electrical
+              </span>
+              <span class="tag">
+                <i class="fas fa-tools"></i>
+                Plumbing
+              </span>
+              <span class="tag">
+                <i class="fas fa-car"></i>
+                Car Service
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Services Section -->
+<section id="services" class="services">
+  <div class="container">
+      <div class="section-header">
+    <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Professional services delivered by verified experts</p>
+      </div>
+      
+    <div class="services-grid">
+      <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>General Technicians</h3>
+          <p>Multi-skilled professionals for various home and office repairs</p>
+          <div class="service-features">
+            <span class="feature">✓ 24/7 Available</span>
+            <span class="feature">✓ Licensed</span>
+          </div>
+      </div> 
+
+        <a href="electronics.html" class="service-link">
+  <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+    <h3>Electricians</h3>
+            <p>Certified electrical work and emergen      cy repairs</p>
+            <div class="service-features">
+              <span class="feature">✓ Emergency Service</span>
+              <span class="feature">✓ Safety Certified</span>
+            </div>
+  </div>
+</a>
+     
+     <a href="vehicles.html " class="service-link">
+  <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-car"></i>
+            </div>
+    <h3>Mechanics</h3>
+            <p>Expert vehicle maintenance and repair services</p>
+            <div class="service-features">
+              <span class="feature">✓ All Vehicle Types</span>
+              <span class="feature">✓ Mobile Service</span>
+            </div>
+  </div>
+</a>
+      </div>
+    </div>
+</section>
+
+<style>
+  .services-grid {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: stretch;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+  gap: 20px; /* space between cards */
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 300px; /* set fixed width for equal cards */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.service-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+</style>
+
+  <!-- Categories Section -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Service Categories</h2>
+        <p class="section-subtitle">Choose from our wide range of specialized services</p>
+      </div>
+      
+      <div class="categories-grid">
+        <a href="electronics-services.html" class="category-card">
+          <div class="category-image">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <div class="category-content">
+        <h3>Electronics</h3>
+            <p>TV, AC, Laptop, and more</p>
+            <span class="category-count">15+ Services</span>
+      </div>
+    </a>
+
+        <a href="vehicle-services.html" class="category-card">
+          <div class="category-image">    
+            <i class="fas fa-motorcycle"></i>
+          </div>
+          <div class="category-content">
+        <h3>Vehicles</h3>
+            <p>Car, Bike, Auto, and more</p>
+            <span class="category-count">8+ Services</span>
+      </div>
+    </a>
+      </div>
+  </div>
+</section>
+
+
+<script>
+function scrollGallery(id, direction) {
+  const gallery = document.getElementById(id);
+
+  // Adjust scroll amount per click (px)
+  const scrollAmount = 300; 
+
+  gallery.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+</script>
+<style>
+  a{
+    text-decoration: none;
+  }
+ 
+</style>
+<section id="gall">
+  <!-- Electronics Gallery -->
+ <a href="e-ec.html"> <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Electronics Repair</h2>
+        <p class="gallery-subtitle">Professional repair services for all your electronic devices</p>
+        <div class="gallery-controls">
+          <button class="gallery-btn prev" onclick="scrollGallery('electronics', -1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="gallery-btn next" onclick="scrollGallery('electronics', 1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+    </div>
+  </div>
+
+  <div class="gallery" id="electronics">
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/TV.html.png" alt="TV Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>TV Repair</h4>
+          <p>Professional TV repair services</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/FRIDGE.webp" alt="Fridge Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Fridge Repair</h4>
+          <p>Expert refrigerator maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/LAPTOP.webp" alt="Laptop Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Laptop Repair</h4>
+          <p>Computer and laptop services</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/AC.jpg" alt="AC Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>AC Repair</h4>
+          <p>Air conditioning maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/micro wvae.jpeg" alt="Microwave Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Microwave Repair</h4>
+          <p>Kitchen appliance services</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/camera.jpeg" alt="Camera Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Camera Repair</h4>
+          <p>Photography equipment repair</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/speakers.jpeg" alt="Speaker Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Speaker Repair</h4>
+          <p>Audio equipment services</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/washing machine.jpeg" alt="Washing Machine Repair">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Washing Machine</h4>
+          <p>Laundry appliance repair</p>
+    </div>
+  </div>
+  </div>
+</section></a>
+
+  <a href="e-ec.html"><!-- Vehicle Services Gallery -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Vehicle Services</h2>
+        <p class="gallery-subtitle">Professional repair and maintenance for all types of vehicles</p>
+        <div class="gallery-controls">
+          <button class="gallery-btn prev" onclick="scrollGallery('vehicles', -1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="gallery-btn next" onclick="scrollGallery('vehicles', 1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+    </div>
+  </div>
+
+      <div class="gallery" id="vehicles">
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/bikr.jpeg" alt="Bike Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Bike Service</h4>
+          <p>Motorcycle repair and maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/car.jpeg" alt="Car Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Car Service</h4>
+          <p>Automobile repair and maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/bus.jpeg" alt="Bus Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Bus Service</h4>
+          <p>Commercial vehicle maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/auto.jpeg" alt="Auto Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Auto Service</h4>
+          <p>Three-wheeler repair services</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/van.jpeg" alt="Van Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Van Service</h4>
+          <p>Van repair and maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/scooter.jpeg" alt="Scooter Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Scooter Service</h4>
+          <p>Scooter repair and maintenance</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/truck.jpeg" alt="Truck Service">
+            <div class="item-overlay">
+              <i class="fas fa-tools"></i>
+            </div>
+          </div>
+          <h4>Truck Service</h4>
+          <p>Heavy vehicle maintenance</p>
+        </div>
+      </div>
+  </div>
+</section></a>
+
+<!-- Spare Parts Gallery -->
+<a href="spare-parts.html"> <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Spare Parts</h2>
+        <p class="gallery-subtitle">Genuine spare parts for electronics and vehicles</p>
+        <div class="gallery-controls">
+          <button class="gallery-btn prev" onclick="scrollGallery('spare-parts', -1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="gallery-btn next" onclick="scrollGallery('spare-parts', 1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="gallery" id="spare-parts">
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/laptop-parts.jpg" alt="Laptop Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=Laptop+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-microchip"></i>
+            </div>
+          </div>
+          <h4>Laptop Parts</h4>
+          <p>Genuine laptop components</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/mobile-parts.jpg" alt="Mobile Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=Mobile+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+          </div>
+          <h4>Mobile Parts</h4>
+          <p>Smartphone repair components</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/tv-parts.jpg" alt="TV Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=TV+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-tv"></i>
+            </div>
+          </div>
+          <h4>TV Parts</h4>
+          <p>Television repair components</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/car-parts.jpg" alt="Car Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=Car+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-car"></i>
+            </div>
+          </div>
+          <h4>Car Parts</h4>
+          <p>Automobile replacement parts</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/bike-parts.jpg" alt="Bike Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=Bike+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-motorcycle"></i>
+            </div>
+          </div>
+          <h4>Bike Parts</h4>
+          <p>Motorcycle components</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/ac-parts.jpg" alt="AC Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=AC+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-snowflake"></i>
+            </div>
+          </div>
+          <h4>AC Parts</h4>
+          <p>Air conditioner components</p>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="item-image">
+            <img src="images/fridge-parts.jpg" alt="Fridge Parts" onerror="this.src='https://via.placeholder.com/300x200/f1f5f9/64748b?text=Fridge+Parts'">
+            <div class="item-overlay">
+              <i class="fas fa-temperature-low"></i>
+            </div>
+          </div>
+          <h4>Fridge Parts</h4>
+          <p>Refrigerator components</p>
+        </div>
+      </div>
+    </div>
+</section></a>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose PowerLink?</h2>
+        <p class="section-subtitle">Experience the difference with our professional service standards</p>
+      </div>
+      
+    <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>30 Min Arrival</h3>
+          <p>Guaranteed fast service at your doorstep with real-time tracking</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Verified Technicians</h3>
+          <p>Only trusted and skilled professionals with background verification</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dollar-sign"></i>
+          </div>
+          <h3>Transparent Pricing</h3>
+          <p>No hidden charges. Get upfront quotes and pay only for what you need</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Ratings & Reviews</h3>
+          <p>Choose based on genuine feedback from thousands of satisfied customers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+    <h2>About PowerLink</h2>
+          <p class="about-description">
+            PowerLink is your trusted partner for all electrical and mechanical services. We connect you with verified, skilled professionals who deliver exceptional service right at your doorstep. Whether it's emergency repairs, routine maintenance, or complex installations, our network of certified technicians ensures quality workmanship and customer satisfaction.
+          </p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-number">500+</span>
+              <span class="stat-text">Expert Technicians</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">10,000+</span>
+              <span class="stat-text">Happy Customers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">24/7</span>
+              <span class="stat-text">Service Available</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <i class="fas fa-tools"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner With Us -->
+  <section id="partner" class="partner">
+    <div class="container">
+      <div class="partner-content">
+    <h2>Partner With Us</h2>
+        <p>Join PowerLink as a verified technician and grow your business with us. Access thousands of customers and build your reputation.</p>
+        <div class="partner-benefits">
+          <div class="benefit">
+            <i class="fas fa-users"></i>
+            <span>Access to customers</span>
+          </div>
+          <div class="benefit">
+            <i class="fas fa-chart-line"></i>
+            <span>Grow your business</span>
+          </div>
+          <div class="benefit">
+            <i class="fas fa-shield-alt"></i>
+            <span>Insurance coverage</span>
+          </div>
+        </div>
+        <a href="partners/partners.html" class="btn-primary">
+          <i class="fas fa-handshake"></i>
+          Join Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download App Section -->
+  <section id="download" class="download">
+    <div class="container">
+      <div class="download-content">
+        <h2>Get the PowerLink App</h2>
+        <p>Download our mobile app for faster booking and better service experience</p>
+    <div class="download-buttons">
+          <a href="https://play.google.com/store/games?hl=en_IN" class="download-btn">
+            <img src="images/playstore.webp" alt="Play Store">
+            <div class="btn-text">
+              <span class="btn-label">Get it on</span>
+              <span class="btn-store">Google Play</span>
+            </div>
+          </a>
+          <a href="https://www.apple.com/in/app-store/" class="download-btn">
+            <img src="images/app.png" alt="App Store">
+            <div class="btn-text">
+              <span class="btn-label">Download on the</span>
+              <span class="btn-store">App Store</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+    <h2>Contact Us</h2>
+      <p>Have questions? We're here to help!</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>support@powerlink.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>+91 1234567890</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Customer Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-bolt"></i>
+            <span>PowerLink</span>
+          </div>
+          <p>Your trusted partner for all electrical and mechanical services.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Electricians</a></li>
+            <li><a href="#services">Mechanics</a></li>
+            <li><a href="#services">Technicians</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#partner">Partners</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 PowerLink. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Navigation Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    }));
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Gallery scroll function
+    function scrollGallery(id, direction) {
+      const gallery = document.getElementById(id);
+      if (gallery) {
+        const scrollAmount = 300;
+        gallery.scrollBy({
+          left: direction * scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.service-card, .feature-card, .gallery-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    document.querySelector(".search-btn").addEventListener("click", function() {
+  const locationInput = document.querySelector('.search-input[placeholder="Enter your location"]').value.trim();
+  
+  if(locationInput !== "") {
+    const mapFrame = document.getElementById("googleMap");
+    const mapContainer = document.querySelector(".map-container");
+    
+    // Create Google Maps embed URL
+    const mapURL = `https://www.google.com/maps?q=${encodeURIComponent(locationInput)}&output=embed`;
+    
+    // Set the iframe source dynamically
+    mapFrame.src = mapURL;
+    
+    // Show the map
+    mapContainer.style.display = "block";
+  } else {
+    alert("Please enter a location to view the map.");
+  }
+});
+
+  </script>
+</body>
+</html>

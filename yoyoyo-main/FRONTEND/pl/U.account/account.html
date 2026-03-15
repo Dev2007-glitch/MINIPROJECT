@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerLink Account</title>
+<link rel="stylesheet" href="sidebar.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>PowerLink</h2>
+      <p>Account Dashboard</p>
+    </div>
+    <div class="user-profile">
+      <div class="avatar">
+        <img src="https://ui-avatars.com/api/?name=John+Doe&background=ffcc00&color=fff" alt="User Avatar">
+      </div>
+      <div class="user-info">
+        <h3>John Doe</h3>
+        <p>Premium Member</p>
+      </div>
+    </div>
+    <ul class="sidebar-menu">
+      <li><a href="#" data-page="account" class="active"><i class="fas fa-user"></i> Account Info</a></li>
+      <li><a href="#" data-page="orders"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+      <li><a href="#" data-page="payments"><i class="fas fa-credit-card"></i> Payments</a></li>
+      <li><a href="#" data-page="addresses"><i class="fas fa-map-marker-alt"></i> Addresses</a></li>
+      <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> Settings</a></li>
+      <li><a href="../index.html"><i class="fas fa-home"></i> Back to Home</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content" id="content">
+    <div class="content-header">
+      <h1>Account Info</h1>
+      <div class="header-actions">
+        <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button>
+      </div>
+    </div>
+    
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-tools"></i></div>
+        <div class="stat-info">
+          <h3>5</h3>
+          <p>Services Used</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div class="stat-info">
+          <h3>4.8</h3>
+          <p>Rating</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="stat-info">
+          <h3>12</h3>
+          <p>Completed Orders</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card profile-card">
+      <div class="card-header">
+        <h2>Personal Information</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-row">
+          <div class="info-label"><i class="fas fa-user"></i> Name</div>
+          <div class="info-value">John Doe</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label"><i class="fas fa-envelope"></i> Email</div>
+          <div class="info-value">john@example.com</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label"><i class="fas fa-phone"></i> Phone</div>
+          <div class="info-value">+91 9876543210</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+          <div class="info-value">123 Street, City, State, India</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const content = document.getElementById("content");
+const pages = {
+  account: `<div class="content-header">
+              <h1>Account Info</h1>
+              <div class="header-actions">
+                <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button>
+              </div>
+            </div>
+            
+            <div class="dashboard-stats">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-tools"></i></div>
+                <div class="stat-info">
+                  <h3>5</h3>
+                  <p>Services Used</p>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                <div class="stat-info">
+                  <h3>4.8</h3>
+                  <p>Rating</p>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-info">
+                  <h3>12</h3>
+                  <p>Completed Orders</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card profile-card">
+              <div class="card-header">
+                <h2>Personal Information</h2>
+              </div>
+              <div class="card-body">
+                <div class="info-row">
+                  <div class="info-label"><i class="fas fa-user"></i> Name</div>
+                  <div class="info-value">John Doe</div>
+                </div>
+                <div class="info-row">
+                  <div class="info-label"><i class="fas fa-envelope"></i> Email</div>
+                  <div class="info-value">john@example.com</div>
+                </div>
+                <div class="info-row">
+                  <div class="info-label"><i class="fas fa-phone"></i> Phone</div>
+                  <div class="info-value">+91 9876543210</div>
+                </div>
+                <div class="info-row">
+                  <div class="info-label"><i class="fas fa-map-marker-alt"></i> Address</div>
+                  <div class="info-value">123 Street, City, State, India</div>
+                </div>
+              </div>
+            </div>`,
+
+  orders: `<div class="content-header">
+              <h1>Orders</h1>
+              <div class="header-actions">
+                <button class="btn btn-secondary"><i class="fas fa-filter"></i> Filter</button>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <h2>Recent Orders</h2>
+              </div>
+              <div class="card-body">
+                <div class="order-item">
+                  <div class="order-info">
+                    <h3>Order #101</h3>
+                    <p class="order-date">June 15, 2023</p>
+                    <p class="order-service">AC Repair Service</p>
+                  </div>
+                  <div class="order-status completed">
+                    <span>Completed</span>
+                  </div>
+                </div>
+                
+                <div class="order-item">
+                  <div class="order-info">
+                    <h3>Order #102</h3>
+                    <p class="order-date">July 2, 2023</p>
+                    <p class="order-service">Refrigerator Maintenance</p>
+                  </div>
+                  <div class="order-status in-progress">
+                    <span>In Progress</span>
+                  </div>
+                </div>
+                
+                <div class="order-item">
+                  <div class="order-info">
+                    <h3>Order #103</h3>
+                    <p class="order-date">July 10, 2023</p>
+                    <p class="order-service">TV Installation</p>
+                  </div>
+                  <div class="order-status pending">
+                    <span>Pending</span>
+                  </div>
+                </div>
+              </div>
+            </div>`,
+
+  payments: `<div class="content-header">
+                <h1>Payments</h1>
+                <div class="header-actions">
+                  <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Payment Method</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="card-header">
+                  <h2>Payment Methods</h2>
+                </div>
+                <div class="card-body">
+                  <div class="payment-method">
+                    <div class="payment-icon"><i class="fab fa-cc-visa"></i></div>
+                    <div class="payment-details">
+                      <h3>Visa Credit Card</h3>
+                      <p>**** **** **** 1234</p>
+                      <p>Expires: 05/25</p>
+                    </div>
+                    <div class="payment-actions">
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  
+                  <div class="payment-method">
+                    <div class="payment-icon"><i class="fab fa-paypal"></i></div>
+                    <div class="payment-details">
+                      <h3>PayPal</h3>
+                      <p>john@example.com</p>
+                    </div>
+                    <div class="payment-actions">
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>`,
+
+  addresses: `<div class="content-header">
+                <h1>Addresses</h1>
+                <div class="header-actions">
+                  <button class="btn btn-primary"><i class="fas fa-plus"></i> Add New Address</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="card-header">
+                  <h2>Saved Addresses</h2>
+                </div>
+                <div class="card-body">
+                  <div class="address-card">
+                    <div class="address-type">Home</div>
+                    <div class="address-details">
+                      <p>123 Street, City, State, India</p>
+                      <p>PIN: 400001</p>
+                    </div>
+                    <div class="address-actions">
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                  
+                  <div class="address-card">
+                    <div class="address-type">Office</div>
+                    <div class="address-details">
+                      <p>456 Avenue, City, State, India</p>
+                      <p>PIN: 400002</p>
+                    </div>
+                    <div class="address-actions">
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-pencil-alt"></i></button>
+                      <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>`,
+
+  settings: `<div class="content-header">
+                <h1>Settings</h1>
+                <div class="header-actions">
+                  <button class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                </div>
+              </div>
+              
+              <div class="card">
+                <div class="card-header">
+                  <h2>Account Settings</h2>
+                </div>
+                <div class="card-body">
+                  <div class="settings-section">
+                    <h3>Change Password</h3>
+                    <div class="form-group">
+                      <label>Current Password</label>
+                      <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>New Password</label>
+                      <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Confirm New Password</label>
+                      <input type="password" class="form-control">
+                    </div>
+                  </div>
+                  
+                  <div class="settings-section">
+                    <h3>Notification Preferences</h3>
+                    <div class="form-check">
+                      <input type="checkbox" id="email-notif" checked>
+                      <label for="email-notif">Email Notifications</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="sms-notif" checked>
+                      <label for="sms-notif">SMS Notifications</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="promo-notif">
+                      <label for="promo-notif">Promotional Notifications</label>
+                    </div>
+                  </div>
+                  
+                  <div class="settings-section">
+                    <h3>Privacy Settings</h3>
+                    <div class="form-check">
+                      <input type="checkbox" id="profile-visibility" checked>
+                      <label for="profile-visibility">Profile Visibility</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="data-sharing">
+                      <label for="data-sharing">Data Sharing</label>
+                    </div>
+                  </div>
+                </div>
+              </div>`,
+};
+
+document.querySelectorAll(".sidebar a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const page = e.target.dataset.page;
+    content.innerHTML = pages[page];
+
+    document.querySelectorAll(".sidebar a").forEach(a => a.classList.remove("active"));
+    e.target.classList.add("active");
+  });
+});
+</script>
+</body>
+</html>

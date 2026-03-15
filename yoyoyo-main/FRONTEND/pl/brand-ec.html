@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerLink Marketplace</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --primary-color: #0077ff;
+  --shadow: 0 4px 15px rgba(0,0,0,0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #f9fafc;
+  color: #2d3748;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background:white;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: var(--shadow-lg);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 80px;
+}
+
+/* ===== LOGO ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo i {
+  margin-right: 10px;
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--primary-color), #2980b9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.4s ease;
+}
+
+.logo:hover i {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* ===== NAV MENU ===== */
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== NAV LINKS ===== */
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 10px 0;
+}
+
+/* Fancy hover effect */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #00c6ff);
+  border-radius: 5px;
+  transition: transform 0.35s ease;
+  transform-origin: center;
+  opacity: 0;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.nav-link:hover::before {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Active link highlight */
+.nav-link.active {
+  color: var(--primary-color);
+}
+
+.nav-link.active::before {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* ===== ICON ===== */
+.nav-link i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover i {
+  transform: translateY(-2px);
+}
+
+/* ===== HAMBURGER ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background: #2d3748;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--background-white);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s ease;
+  }
+
+  .nav-links.open {
+    max-height: 300px;
+  }
+
+  .nav-link {
+    padding: 15px;
+    justify-content: center;
+  }
+}
+
+
+/* SEARCH */
+.search-section {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+}
+.search-section h2 { font-size: 1.8rem; margin-bottom: 15px; }
+.search-box {
+  display: flex;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1rem;
+  outline: none;
+}
+.search-box button {
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 0 25px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.search-box button:hover { background: #005bd1; }
+
+/* BRAND SECTIONS */
+section.brand-section { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+.brand-section h3 { font-size: 1.6rem; margin-bottom: 20px; border-left: 5px solid var(--primary-color); padding-left: 10px; }
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+.brand-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 220px;
+}
+.brand-card:hover { transform: translateY(-5px); }
+.brand-card img { width: 100px; height: 100px; object-fit: contain; margin-bottom: 15px; }
+.brand-card h4 { font-size: 1.2rem; color: #2d3748; margin: 0 0 10px 0; }
+.brand-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  text-align: left;
+  height: 65%;
+  overflow-y: auto;
+}
+.brand-card.active .brand-details {
+  transform: translateY(0);
+}
+.brand-details h5 {
+  margin: 0 0 8px 0;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+.brand-details p {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.brand-details .close-details {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.brand-details .close-details:hover {
+  color: #333;
+}
+
+/* NO MATCH MESSAGE */
+#no-match {
+  text-align: center;
+  margin: 50px auto;
+  font-size: 1.2rem;
+  color: #000000;
+  display: none;
+}
+#no-match img { max-width: 150px; margin-top: 20px; }
+
+/* FOOTER */
+footer {
+  background: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+ <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-bolt"></i>
+        <span>PowerLink</span>
+      </div>
+      <nav class="nav-menu">
+    <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a></li>
+          <li><a href="partners/partners.html" class="nav-link">
+            <i class="fas fa-handshake"></i>
+            <span>Partners</span>
+          </a></li>
+          <li><a href="login.html" class="nav-link">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+          </a></li>
+          <li><a href="signup.html" class="nav-link">
+            <i class="fas fa-user-plus"></i>
+            <span>Sign Up</span>
+          </a></li>
+          <li><a href="../W&P/index.html" class="nav-link">
+            <i class="fas fa-tools"></i>
+            <span>Technician</span>
+          </a></li>
+            <li><a href="cart.html" class="nav-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+          </a></li>
+          
+</ul>
+  </nav>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+</header> 
+
+
+<!-- SEARCH -->
+<div class="search-section">
+  <h2>Find Your Brand</h2>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search for electronics or vehicle brands..." onkeyup="searchBrand()">
+    <button onclick="searchBrand()"><i class="fas fa-search"></i></button>
+  </div>
+</div>
+
+<!-- NO MATCH MESSAGE -->
+<div id="no-match">
+  <p> Sorry! Nothing matches your search</p>
+  <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="No Match">
+</div>
+
+<!-- ELECTRONICS BRANDS -->
+<section class="brand-section" id="electronics">
+  <h3>Top Electronics Brands</h3>
+  <div class="brand-grid" id="electronicsGrid">
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
+      <h4>Apple</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Apple Inc.</h5>
+        <p><strong>Founded:</strong> April 1, 1976</p>
+        <p><strong>Headquarters:</strong> Cupertino, California, USA</p>
+        <p><strong>Founders:</strong> Steve Jobs, Steve Wozniak, Ronald Wayne</p>
+        <p><strong>Key Products:</strong> iPhone, iPad, Mac, Apple Watch, AirPods</p>
+        <p>Apple revolutionized personal technology with the introduction of the Macintosh in 1984. Today, Apple leads the world in innovation with iPhone, iPad, Mac, Apple Watch, and Apple TV.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg">
+      <h4>Dell</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Dell Technologies</h5>
+        <p><strong>Founded:</strong> February 1, 1984</p>
+        <p><strong>Headquarters:</strong> Round Rock, Texas, USA</p>
+        <p><strong>Founder:</strong> Michael Dell</p>
+        <p><strong>Key Products:</strong> Laptops, Desktops, Servers, Data Storage</p>
+        <p>Dell Technologies is an American multinational technology company that develops, sells, repairs, and supports computers and related products and services.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg">
+      <h4>Samsung</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Samsung Electronics</h5>
+        <p><strong>Founded:</strong> January 13, 1969</p>
+        <p><strong>Headquarters:</strong> Suwon, South Korea</p>
+        <p><strong>Founder:</strong> Lee Byung-chul</p>
+        <p><strong>Key Products:</strong> Smartphones, TVs, Home Appliances, Semiconductors</p>
+        <p>Samsung Electronics is a global leader in technology, opening new possibilities for people everywhere through relentless innovation and discovery.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/LG_logo_%282015%29.svg">
+      <h4>LG</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>LG Electronics</h5>
+        <p><strong>Founded:</strong> October 1958</p>
+        <p><strong>Headquarters:</strong> Seoul, South Korea</p>
+        <p><strong>Founder:</strong> Koo In-hwoi</p>
+        <p><strong>Key Products:</strong> TVs, Home Appliances, Mobile Devices</p>
+        <p>LG Electronics is a global innovator in technology and consumer electronics with operations in more than 100 countries.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Sony.svg">
+      <h4>Sony</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Sony Corporation</h5>
+        <p><strong>Founded:</strong> May 7, 1946</p>
+        <p><strong>Headquarters:</strong> Tokyo, Japan</p>
+        <p><strong>Founders:</strong> Masaru Ibuka, Akio Morita</p>
+        <p><strong>Key Products:</strong> Electronics, Gaming Consoles, Cameras, Audio Equipment</p>
+        <p>Sony Corporation is a Japanese multinational conglomerate known for producing electronics, gaming, entertainment, and financial services products.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Panasonic_logo.svg">
+      <h4>Panasonic</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Panasonic Corporation</h5>
+        <p><strong>Founded:</strong> March 7, 1918</p>
+        <p><strong>Headquarters:</strong> Kadoma, Osaka, Japan</p>
+        <p><strong>Founder:</strong> Konosuke Matsushita</p>
+        <p><strong>Key Products:</strong> Electronics, Home Appliances, Batteries</p>
+        <p>Panasonic Corporation is a major Japanese multinational electronics company, one of the largest electronics producers in the world.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Intel_logo_%282020%2C_dark_blue%29.svg">
+      <h4>Intel</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Intel Corporation</h5>
+        <p><strong>Founded:</strong> July 18, 1968</p>
+        <p><strong>Headquarters:</strong> Santa Clara, California, USA</p>
+        <p><strong>Founders:</strong> Gordon Moore, Robert Noyce</p>
+        <p><strong>Key Products:</strong> Processors, Chipsets, Motherboards</p>
+        <p>Intel Corporation is an American multinational corporation and technology company, the world's largest semiconductor chip manufacturer by revenue.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg">
+      <h4>HP</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Hewlett-Packard</h5>
+        <p><strong>Founded:</strong> January 1, 1939</p>
+        <p><strong>Headquarters:</strong> Palo Alto, California, USA</p>
+        <p><strong>Founders:</strong> Bill Hewlett, David Packard</p>
+        <p><strong>Key Products:</strong> Computers, Printers, 3D Printing Solutions</p>
+        <p>HP Inc. is an American multinational information technology company that develops personal computers, printers and related supplies.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Lenovo_logo_2015.svg">
+      <h4>Lenovo</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Lenovo Group Limited</h5>
+        <p><strong>Founded:</strong> November 1, 1984</p>
+        <p><strong>Headquarters:</strong> Beijing, China & Morrisville, North Carolina, USA</p>
+        <p><strong>Founder:</strong> Liu Chuanzhi</p>
+        <p><strong>Key Products:</strong> Laptops, Desktops, Tablets, Smartphones</p>
+        <p>Lenovo is a Chinese multinational technology company that designs, develops, manufactures, and sells personal computers, tablets, smartphones, and more.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg">
+      <h4>ASUS</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>ASUSTeK Computer Inc.</h5>
+        <p><strong>Founded:</strong> April 2, 1989</p>
+        <p><strong>Headquarters:</strong> Taipei, Taiwan</p>
+        <p><strong>Founders:</strong> T.H. Tung, Ted Hsu, Wayne Hsieh, M.T. Liao</p>
+        <p><strong>Key Products:</strong> Laptops, Desktops, Phones, Motherboards</p>
+        <p>ASUS is a Taiwanese multinational computer and phone hardware and electronics company known for high-quality products.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/NVIDIA_Logo.svg">
+      <h4>NVIDIA</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>NVIDIA Corporation</h5>
+        <p><strong>Founded:</strong> April 5, 1993</p>
+        <p><strong>Headquarters:</strong> Santa Clara, California, USA</p>
+        <p><strong>Founders:</strong> Jensen Huang, Chris Malachowsky, Curtis Priem</p>
+        <p><strong>Key Products:</strong> GPUs, AI Computing, Gaming Technology</p>
+        <p>NVIDIA is an American multinational technology company that designs graphics processing units (GPUs) and systems on chip units (SoCs) for gaming, professional visualization, data centers, and automotive markets.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Philips_logo.svg">
+      <h4>Philips</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Koninklijke Philips N.V.</h5>
+        <p><strong>Founded:</strong> May 15, 1891</p>
+        <p><strong>Headquarters:</strong> Amsterdam, Netherlands</p>
+        <p><strong>Founders:</strong> Gerard Philips, Anton Philips</p>
+        <p><strong>Key Products:</strong> Healthcare Technology, Consumer Electronics, Lighting</p>
+        <p>Philips is a Dutch multinational conglomerate corporation that focuses on healthcare technology and consumer electronics.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg">
+      <h4>AMD</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Advanced Micro Devices, Inc.</h5>
+        <p><strong>Founded:</strong> May 1, 1969</p>
+        <p><strong>Headquarters:</strong> Santa Clara, California, USA</p>
+        <p><strong>Founders:</strong> Jerry Sanders, Edwin Turney</p>
+        <p><strong>Key Products:</strong> Processors, Graphics Cards, Chipsets</p>
+        <p>AMD is an American multinational semiconductor company that develops computer processors and related technologies for business and consumer markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VEHICLE BRANDS -->
+<section class="brand-section" id="vehicles">
+  <h3>Top Vehicle Brands in India</h3>
+  <div class="brand-grid" id="vehiclesGrid">
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Tata_logo.svg">
+      <h4>Tata Motors</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Tata Motors Limited</h5>
+        <p><strong>Founded:</strong> 1945</p>
+        <p><strong>Headquarters:</strong> Mumbai, Maharashtra, India</p>
+        <p><strong>Parent:</strong> Tata Group</p>
+        <p><strong>Key Products:</strong> Cars, Trucks, Buses, SUVs, Commercial Vehicles</p>
+        <p>Tata Motors is India's largest multinational automotive organization with operations in India, the UK, South Korea, Thailand, and South Africa. The company is known for vehicles like the Tata Nano, Nexon, and Harrier.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Mahindra_logo.svg">
+      <h4>Mahindra & Mahindra</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Mahindra & Mahindra Limited</h5>
+        <p><strong>Founded:</strong> October 2, 1945</p>
+        <p><strong>Headquarters:</strong> Mumbai, Maharashtra, India</p>
+        <p><strong>Founders:</strong> JC Mahindra, KC Mahindra</p>
+        <p><strong>Key Products:</strong> SUVs, Tractors, Commercial Vehicles, Electric Vehicles</p>
+        <p>Mahindra & Mahindra is an Indian multinational vehicle manufacturing corporation and part of the Mahindra Group. The company is known for rugged SUVs like the Thar, Scorpio, and XUV series.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Maruti_Suzuki_logo.svg">
+      <h4>Maruti Suzuki</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Maruti Suzuki India Limited</h5>
+        <p><strong>Founded:</strong> February 24, 1981</p>
+        <p><strong>Headquarters:</strong> New Delhi, India</p>
+        <p><strong>Parent:</strong> Suzuki Motor Corporation (Japan)</p>
+        <p><strong>Key Products:</strong> Passenger Cars, Hatchbacks, Sedans, SUVs</p>
+        <p>Maruti Suzuki is India's largest passenger car manufacturer with over 50% market share. Popular models include the Alto, Swift, Baleno, and Brezza.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Bajaj_Auto_logo.svg">
+      <h4>Bajaj Auto</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Bajaj Auto Limited</h5>
+        <p><strong>Founded:</strong> November 29, 1945</p>
+        <p><strong>Headquarters:</strong> Pune, Maharashtra, India</p>
+        <p><strong>Founder:</strong> Jamnalal Bajaj</p>
+        <p><strong>Key Products:</strong> Motorcycles, Three-wheelers, Quadricycles</p>
+        <p>Bajaj Auto is one of the world's largest manufacturers of two-wheelers and three-wheelers. Popular models include the Pulsar, Dominar, and RE auto-rickshaw.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Hero_Motocorp_logo.svg">
+      <h4>Hero MotoCorp</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Hero MotoCorp Ltd.</h5>
+        <p><strong>Founded:</strong> January 19, 1984</p>
+        <p><strong>Headquarters:</strong> New Delhi, India</p>
+        <p><strong>Founder:</strong> Brijmohan Lall Munjal</p>
+        <p><strong>Key Products:</strong> Motorcycles, Scooters</p>
+        <p>Hero MotoCorp is the world's largest manufacturer of two-wheelers by volume. Popular models include the Splendor, Passion, and Maestro Edge.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/TVS_Motor_Company_logo.svg">
+      <h4>TVS Motor Company</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>TVS Motor Company</h5>
+        <p><strong>Founded:</strong> 1978</p>
+        <p><strong>Headquarters:</strong> Chennai, Tamil Nadu, India</p>
+        <p><strong>Parent:</strong> TVS Group</p>
+        <p><strong>Key Products:</strong> Motorcycles, Scooters, Mopeds, Three-wheelers</p>
+        <p>TVS Motor Company is the third largest two-wheeler manufacturer in India. Popular models include the Apache series, Jupiter, and Ntorq.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Eicher_Motors_logo.svg">
+      <h4>Eicher Motors</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Eicher Motors Limited</h5>
+        <p><strong>Founded:</strong> 1948</p>
+        <p><strong>Headquarters:</strong> New Delhi, India</p>
+        <p><strong>Key Products:</strong> Royal Enfield Motorcycles, Commercial Vehicles</p>
+        <p>Eicher Motors is the parent company of Royal Enfield, one of the world's oldest motorcycle brands in continuous production. Popular models include the Classic 350, Bullet, and Himalayan.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Toyota_logo.svg">
+      <h4>Toyota</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Toyota Motor Corporation</h5>
+        <p><strong>Founded:</strong> August 28, 1937</p>
+        <p><strong>Headquarters:</strong> Toyota City, Aichi, Japan</p>
+        <p><strong>Founder:</strong> Kiichiro Toyoda</p>
+        <p><strong>Key Products:</strong> Automobiles, Luxury Vehicles, Commercial Vehicles</p>
+        <p>Toyota is the world's largest automobile manufacturer by production volume. In India, popular models include the Innova, Fortuner, and Glanza.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Honda_logo.svg">
+      <h4>Honda</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Honda Motor Co., Ltd.</h5>
+        <p><strong>Founded:</strong> October 1946</p>
+        <p><strong>Headquarters:</strong> Minato, Tokyo, Japan</p>
+        <p><strong>Founder:</strong> Soichiro Honda</p>
+        <p><strong>Key Products:</strong> Automobiles, Motorcycles, Power Equipment</p>
+        <p>Honda is the world's largest motorcycle manufacturer and a leading automobile producer. In India, popular models include the City, Amaze, and Activa scooter.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Hyundai_Motor_Company_logo.svg">
+      <h4>Hyundai</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Hyundai Motor Company</h5>
+        <p><strong>Founded:</strong> December 29, 1967</p>
+        <p><strong>Headquarters:</strong> Seoul, South Korea</p>
+        <p><strong>Founder:</strong> Chung Ju-yung</p>
+        <p><strong>Key Products:</strong> Automobiles, Electric Vehicles, Luxury Cars</p>
+        <p>Hyundai is South Korea's largest automaker and one of India's leading car manufacturers. Popular models include the Creta, i20, and Venue.</p>
+      </div>
+    </div>
+    <div class="brand-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Kia_logo.svg">
+      <h4>Kia</h4>
+      <div class="brand-details">
+        <button class="close-details"><i class="fas fa-times"></i></button>
+        <h5>Kia Corporation</h5>
+        <p><strong>Founded:</strong> December 11, 1944</p>
+        <p><strong>Headquarters:</strong> Seoul, South Korea</p>
+        <p><strong>Parent:</strong> Hyundai Motor Group</p>
+        <p><strong>Key Products:</strong> Automobiles, SUVs, Electric Vehicles</p>
+        <p>Kia is South Korea's second-largest automobile manufacturer. In India, popular models include the Seltos, Sonet, and Carens.</p>
+      </div>
+    </div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Rajah+Motors"><h4>Rajah Motors</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=San+Motors"><h4>San Motors</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Sipani"><h4>Sipani Automobiles</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Standard+Motors"><h4>Standard Motor Products</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Daewoo"><h4>Daewoo Motors India</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Ford"><h4>Ford India</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=GM"><h4>General Motors India</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Mahindra+Renault"><h4>Mahindra Renault</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Chinkara"><h4>Chinkara Motors</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Rajah+Motors"><h4>Rajah Motors</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Premier"><h4>Premier Automobiles</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=San+Motors"><h4>San Motors</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Sipani"><h4>Sipani Automobiles</h4></div>
+    <div class="brand-card"><img src="https://via.placeholder.com/80?text=Standard+Motors"><h4>Standard Motor Products</h4></div>
+  </div>
+</section>
+
+
+<footer>
+  <p>© 2025 PowerLink. Connecting you with trusted technicians.</p>
+</footer>
+
+<script>
+function searchBrand() {
+  const input = document.getElementById("searchInput").value.trim().toLowerCase();
+  const electronicsSection = document.getElementById("electronics");
+  const vehiclesSection = document.getElementById("vehicles");
+  const electronicsCards = document.querySelectorAll("#electronicsGrid .brand-card");
+  const vehiclesCards = document.querySelectorAll("#vehiclesGrid .brand-card");
+  const noMatchDiv = document.getElementById("no-match");
+
+  let found = false;
+
+  function filterCards(cards) {
+    cards.forEach(card => {
+      const name = card.querySelector("h4").textContent.toLowerCase();
+      if(name.includes(input) || input === "") {
+        card.style.display = "block";
+        if(input) found = true;
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  filterCards(electronicsCards);
+  filterCards(vehiclesCards);
+
+  // Hide sections if nothing matches
+  if(input && !found) {
+    electronicsSection.style.display = "none";
+    vehiclesSection.style.display = "none";
+    noMatchDiv.style.display = "block";
+  } else {
+    electronicsSection.style.display = "block";
+    vehiclesSection.style.display = "block";
+    noMatchDiv.style.display = "none";
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all brand cards
+  const brandCards = document.querySelectorAll('.brand-card');
+  
+  // Add click event to each brand card
+  brandCards.forEach(card => {
+    card.addEventListener('click', function() {
+      // Get brand name from the h4 element
+      const brandName = this.querySelector('h4').textContent.trim();
+      // Redirect to e-ec.html with brand parameter
+      window.location.href = `e-ec.html?brand=${encodeURIComponent(brandName)}`;
+    });
+  });
+});
+</script>
+
+</body>
+</html>
